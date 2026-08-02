@@ -259,7 +259,6 @@
             <button onclick="switchTab('encyclopedia')" id="tab-encyclopedia" class="tab-btn pb-2 text-sm uppercase tracking-widest font-bold text-gray-500 transition-all">Энциклопедия</button>
             <button onclick="switchTab('schemes')" id="tab-schemes" class="tab-btn pb-2 text-sm uppercase tracking-widest font-bold text-gray-500 transition-all">Схемы</button>
             <button onclick="switchTab('crystal-viewer')" id="tab-crystal-viewer" class="tab-btn pb-2 text-sm uppercase tracking-widest font-bold text-gray-500 transition-all">Устройство кристалла</button>
-            <button onclick="switchTab('contemplation')" id="tab-contemplation" class="tab-btn pb-2 text-sm uppercase tracking-widest font-bold text-gray-500 transition-all">Созерцание</button>
         </nav>
 
         <div id="content-tracker" class="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -497,54 +496,6 @@
 
             <canvas id="crystal-canvas"></canvas>
         </div>
-
-        <div id="content-contemplation" class="hidden animate-in fade-in duration-500">
-            <div class="glass-card p-0 overflow-hidden h-[75vh] w-full relative">
-                <iframe srcdoc='<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <style>
-        body { margin: 0; overflow: hidden; background: #000; font-family: sans-serif; }
-        #ui { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); text-align: center; color: #00f2ff; z-index: 10; font-family: Orbitron; }
-        #progress-bar { width: 200px; height: 10px; border: 1px solid #00f2ff; margin-top: 5px; }
-        #bar { width: 0%; height: 100%; background: #00f2ff; transition: width 0.1s; }
-    </style>
-</head>
-<body>
-    <div id="ui">
-        <div>ОСТАНОВКА МИРА</div>
-        <div id="progress-bar"><div id="bar"></div></div>
-    </div>
-    <script>
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({antialias: true});
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        document.body.appendChild(renderer.domElement);
-        const geo = new THREE.TorusKnotGeometry(1, 0.3, 100, 16);
-        const mat = new THREE.MeshPhongMaterial({color: 0x00f2ff, wireframe: true});
-        const mesh = new THREE.Mesh(geo, mat);
-        scene.add(mesh);
-        scene.add(new THREE.AmbientLight(0xffffff, 0.5));
-        camera.position.z = 5;
-        let p = 0;
-        function animate() {
-            requestAnimationFrame(animate);
-            mesh.rotation.x += 0.01;
-            mesh.rotation.y += 0.01;
-            p = Math.min(p + 0.1, 100);
-            document.getElementById("bar").style.width = p + "%";
-            renderer.render(scene, camera);
-        }
-        animate();
-    </script>
-</body>
-</html>' class="w-full h-full border-none"></iframe>
-            </div>
-        </div>
     </div>
 
     <audio id="background-music" loop>
@@ -570,7 +521,7 @@
         const TIME_44_MIN = 44 * 60;
 
         function switchTab(tab) {
-            ['tracker', 'session', 'music', 'encyclopedia', 'schemes', 'contemplation', 'crystal-viewer'].forEach(t => {
+            ['tracker', 'session', 'music', 'encyclopedia', 'schemes', 'crystal-viewer'].forEach(t => {
                 const el = $(`content-${t}`);
                 if (el) el.classList.add('hidden');
                 const tabEl = $(`tab-${t}`);
